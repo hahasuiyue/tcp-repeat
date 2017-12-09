@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Require root.
 if [ "$(whoami)" != "root" ]; then
     exec sudo -- "$0" "$@";
@@ -9,20 +9,24 @@ fi
 # original copy of the source and a dev copy. We will copy the original file,
 # append your dev work, and then make the dev copy of the kernel source.
 
-# The files in question. 
-ORIGINAL_FILES[0]=../linux-4.9.45-original/arch/x86/entry/syscalls/syscall_64.tbl
-TARGET_FILES[0]=../linux-4.9.45-dev/arch/x86/entry/syscalls/syscall_64.tbl
-LOCAL_FILES[0]=./syscall_64.tbl
+declare -a ORIGINAL_FILES
+declare -a TARGET_FILES
+declare -a LOCAL_FILES
 
-ORIGINAL_FILES[1]=../linux-4.9.45-original/net/socket.c);
-TARGET_FILES[1]=../linux-4.9.45-dev/net/socket.c;
-LOCAL_FILES[1]=./socket.c
+# The files in question. 
+ORIGINAL_FILES[0]='../linux-4.9.45-original/arch/x86/entry/syscalls/syscall_64.tbl'
+TARGET_FILES[0]='../linux-4.9.45-dev/arch/x86/entry/syscalls/syscall_64.tbl'
+LOCAL_FILES[0]='./syscall_64.tbl'
+
+ORIGINAL_FILES[1]='../linux-4.9.45-original/net/socket.c'
+TARGET_FILES[1]='../linux-4.9.45-dev/net/socket.c'
+LOCAL_FILES[1]='./socket.c'
 
 # The root directory of your dev kernel source.
-BUILD_DIR=../linux-4.9.45-dev
+BUILD_DIR='../linux-4.9.45-dev'
 
 # The version information.
-EXTRAVERSION=send_repeat
+EXTRAVERSION='send_repeat';
 
 for ((i=0;i<${#ORIGINAL_FILES[@]};++i)); do
     cp ${ORIGINAL_FILES[i]} ${TARGET_FILES[i]};
