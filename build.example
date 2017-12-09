@@ -1,0 +1,37 @@
+#!/bin/sh
+# Require root.
+if [ "$(whoami)" != "root" ]; then
+    exec sudo -- "$0" "$@";
+    exit;
+fi
+
+# These represent the files you are modifying, ideally you will have an
+# original copy of the source and a dev copy. We will copy the original file,
+# append your dev work, and then make the dev copy of the kernel source.
+
+# The files in question. 
+ORIGINAL_FILES=(../linux-4.9.45-original/arch/x86/entry/syscalls/syscall_64.tbl ../linux-4.9.45-original/net/socket.c);
+
+TARGET_FILES=(../linux-4.9.45-dev/arch/x86/entry/syscalls/syscall_64.tbl ../linux-4.9.45-dev/net/socket.c);
+
+LOCAL_FILES=(./syscall_64.tbl ./socket.c);
+
+# The root directory of your dev kernel source.
+BUILD_DIR=../test/target
+
+# The version information.
+EXTRAVERSION=send_repeat
+
+for ((i=0;i<${#ORIGINAL_FILES[@]};++i)); do
+    cp ${ORIGINAL_FILES[i]} ${TARGET_FILES[i]};
+    cat ${LOCAL_FILES[i]} >> ${TARGET_FILES[i]};
+done
+cd ${BUILD_DIR}
+echo Building in $(pwd);
+
+# Add in our extraversion
+sed -i "/EXTRAVERSION =/c\EXTRAVERSION = ${EXTRAVERSION}" Makefile
+
+make;
+make modules_install; # Requires root.
+make install; # Requires root.

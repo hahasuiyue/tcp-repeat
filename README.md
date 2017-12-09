@@ -1,0 +1,1 @@
+To run, copy `build.example` to `build`. Make sure it is executable with `chmod +x build`. Then run and have fun!
