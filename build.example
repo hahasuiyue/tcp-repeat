@@ -22,11 +22,15 @@ ORIGINAL_FILES[1]='../linux-4.9.45-original/net/socket.c'
 TARGET_FILES[1]='../linux-4.9.45-dev/net/socket.c'
 LOCAL_FILES[1]='./socket.c'
 
+ORIGINAL_FILES[1]='../linux-4.9.45-original/include/net/tcp.h'
+TARGET_FILES[1]='../linux-4.9.45-dev/include/net/tcp.h'
+LOCAL_FILES[1]='./tcp.h'
+
 # The root directory of your dev kernel source.
 BUILD_DIR='../linux-4.9.45-dev'
 
 # The version information.
-EXTRAVERSION='send_repeat';
+EXTRAVERSION='send-repeat';
 
 for ((i=0;i<${#ORIGINAL_FILES[@]};++i)); do
     cp ${ORIGINAL_FILES[i]} ${TARGET_FILES[i]};
