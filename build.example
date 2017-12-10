@@ -16,15 +16,15 @@ declare -a LOCAL_FILES
 # The files in question. 
 ORIGINAL_FILES[0]='../linux-4.9.45-original/arch/x86/entry/syscalls/syscall_64.tbl'
 TARGET_FILES[0]='../linux-4.9.45-dev/arch/x86/entry/syscalls/syscall_64.tbl'
-LOCAL_FILES[0]='./syscall_64.tbl'
+LOCAL_FILES[0]='./src/syscall_64.tbl'
 
 ORIGINAL_FILES[1]='../linux-4.9.45-original/net/socket.c'
 TARGET_FILES[1]='../linux-4.9.45-dev/net/socket.c'
-LOCAL_FILES[1]='./socket.c'
+LOCAL_FILES[1]='./src/socket.c'
 
-ORIGINAL_FILES[1]='../linux-4.9.45-original/include/net/tcp.h'
-TARGET_FILES[1]='../linux-4.9.45-dev/include/net/tcp.h'
-LOCAL_FILES[1]='./tcp.h'
+ORIGINAL_FILES[2]='../linux-4.9.45-original/include/net/tcp.h'
+TARGET_FILES[2]='../linux-4.9.45-dev/include/net/tcp.h'
+LOCAL_FILES[2]='./src/tcp.h'
 
 # The root directory of your dev kernel source.
 BUILD_DIR='../linux-4.9.45-dev'
