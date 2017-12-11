@@ -50,7 +50,7 @@ cd ${BUILD_DIR}
 # Add in our extraversion
 sed -i "/EXTRAVERSION =/c\EXTRAVERSION = ${EXTRAVERSION}" Makefile
 
-echo Building Kernel $(EXTRAVERSION) in $(pwd).;
+echo Building Kernel ${EXTRAVERSION} in $(pwd).;
 # Build and install kernel modules.
 make;
 make modules_install; # Requires root.
