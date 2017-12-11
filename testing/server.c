@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#define SYS_send_repeat 333
+#define SYS_send_repeat 332
 
 void do_server(int sockfd){
 	

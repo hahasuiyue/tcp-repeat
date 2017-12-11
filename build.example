@@ -47,6 +47,12 @@ for ((i=0;i<${#LOCAL_FILES[@]};++i)); do
     cp ${LOCAL_FILES[i]} ${TARGET_FILES[i]};
 done
 
+echo Building test code;
+cd ./testing/;
+gcc client.c -o client;
+gcc server.c -o server;
+cd ..;
+
 cd ${BUILD_DIR}
 # Add in our extraversion
 sed -i "/EXTRAVERSION =/c\EXTRAVERSION = ${EXTRAVERSION}" Makefile
