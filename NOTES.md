@@ -1,5 +1,9 @@
 # What needs to be done:
-
+I think:
+    - Add options to include/linux/tcp.h tcp_sock struct
+        - just vars on it? one for repeat, default attached as one
+    - Add getsockopt/setsockopt for these options?
+    - To be honest I dunno
 # Figure out TCP TimeStamp Option:
 
 # Path for My Option:

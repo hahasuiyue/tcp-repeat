@@ -19,8 +19,8 @@ LOCAL_FILES[0]='./src/syscall_64.tbl'
 TARGET_FILES[1]='../linux-4.9.45-dev/net/socket.c'
 LOCAL_FILES[1]='./src/socket.c'
 
-TARGET_FILES[2]='../linux-4.9.45-dev/include/net/tcp.h'
-LOCAL_FILES[2]='./src/tcp.h'
+TARGET_FILES[2]='../linux-4.9.45-dev/include/linux/tcp.h'
+LOCAL_FILES[2]='./src/linux_tcp.h'
 
 TARGET_FILES[3]='../linux-4.9.45-dev/net/ipv4/tcp.c'
 LOCAL_FILES[3]='./src/tcp.c'
