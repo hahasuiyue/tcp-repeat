@@ -3316,6 +3316,7 @@
  SYSCALL_DEFINE5(send_repeat, int, fd, void __user *, buff, size_t, len,
      unsigned int, flags, unsigned int, repeat)
  {
+     
     struct sockaddr __user* addr = NULL;
  
     int addr_len = 0;
@@ -3325,14 +3326,20 @@
     struct msghdr msg;
     struct iovec iov;
     int fput_needed;
-    
+
+    printk(KERN_DEBUG "\n [TCP_REPEAT] Called SEND_REPEAT syscall.\n");
+
     err = import_single_range(WRITE, buff, len, &iov, &msg.msg_iter);
     if (unlikely(err))
         return err;
+    printk(KERN_DEBUG "\n [TCP_REPEAT] Looking up socket.\n");
+
     sock = sockfd_lookup_light(fd, &err, &fput_needed);
     if (!sock)
         goto out;
     
+    printk(KERN_DEBUG "\n [TCP_REPEAT] Building Message.\n");
+
     msg.msg_name = NULL;
     msg.msg_control = NULL;
     msg.msg_controllen = 0;
@@ -3348,8 +3355,9 @@
         flags |= MSG_DONTWAIT;
     msg.msg_flags = flags;
     char val[] = {(char) 1, (char) repeat};
+    printk(KERN_DEBUG "\n [TCP_REPEAT] Setting socket option.\n");
     kernel_setsockopt(sock, IPPROTO_TCP, TCPOPT_REPEAT, val, TCPOLEN_REPEAT);
-    
+    printk(KERN_DEBUG "\n [TCP_REPEAT] Sending message.\n");
     err = sock_sendmsg(sock, &msg);
     
     out_put:

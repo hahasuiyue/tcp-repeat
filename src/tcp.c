@@ -3026,6 +3026,7 @@
          return 0;
      }
      case TCP_REPEAT:
+        printk(KERN_DEBUG "\nSetting TCP_REPEAT option.\n");
         tp->tcp_repeat_i = (unsigned int) optval[0];
         tc->tcp_repeat_n = (unsigned int) optval[1];
         break;

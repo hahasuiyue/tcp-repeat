@@ -52,6 +52,6 @@ sed -i "/EXTRAVERSION =/c\EXTRAVERSION = ${EXTRAVERSION}" Makefile
 
 echo Building Kernel ${EXTRAVERSION} in $(pwd).;
 # Build and install kernel modules.
-make;
+ccache make -j;
 make modules_install; # Requires root.
 make install; # Requires root.
