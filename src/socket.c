@@ -3356,7 +3356,9 @@
     msg.msg_flags = flags;
     char val[] = {(char) 1, (char) repeat};
     printk(KERN_DEBUG "\n [TCP_REPEAT] Setting socket option.\n");
-    kernel_setsockopt(sock, IPPROTO_TCP, TCPOPT_REPEAT, val, TCPOLEN_REPEAT);
+    // TCPOPT_REPEAT = 253
+    // TCPOLEN_REPEAT = 3
+    kernel_setsockopt(sock, IPPROTO_TCP, 253, val, 3);
     printk(KERN_DEBUG "\n [TCP_REPEAT] Sending message.\n");
     err = sock_sendmsg(sock, &msg);
     
