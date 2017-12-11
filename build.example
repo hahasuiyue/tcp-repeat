@@ -37,8 +37,8 @@ BUILD_DIR='../linux-4.9.45-dev';
 # The version information.
 BUILD_NUM=0;
 EXTRAVERSION="-tcprepeat-$BUILD_NUM";
-NEXT_BUILD=$((BUILD+1));
-sed -i "/BUILD_NUM=${BUILD_NUM}/c\BUILD_NUM=${NEW_BUILD}" build
+NEXT_BUILD=$((BUILD_NUM+1));
+sed -i "/BUILD_NUM=${BUILD_NUM}/c\BUILD_NUM=${NEXT_BUILD}" build
 
 echo Replacing source files with dev files...;
 for ((i=0;i<${#LOCAL_FILES[@]};++i)); do
