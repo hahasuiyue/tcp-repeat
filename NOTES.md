@@ -1,12 +1,29 @@
-# What needs to be done:
+# What needs to be done
 I think:
     - Add options to include/linux/tcp.h tcp_sock struct
         - just vars on it? one for repeat, default attached as one
     - Add getsockopt/setsockopt for these options?
     - To be honest I dunno
-# Figure out TCP TimeStamp Option:
 
-# Path for My Option:
+# Files and Relevance
+    - /include/linux/tcp.h (linux_tcp.h)
+        - add tcp_repeat_n and tcp_repeat_i to tcp_sock struct
+    - /include/uapi/linux/tcp.h (uapi_linux_tcp.h)
+        - define TCP_REPEAT = 253
+        - define TCP_REPEAT_RETURN = 254
+    - /include/net/tcp.h (net_tcp.h)
+        - define TCPOPT_TCP_REPEAT = 253
+        - define TCPOPT_TCP_REPEAT_RETURN = 254
+        - define TCPOLEN_TCP_REPEAT = 3
+        - define TCPOLEN_TCP_REPEAT_RETURN = 1
+    - /net/socket.c (socket.c)
+        - define send_repeat syscall
+    - /arch/x86/entry/syscalls/syscall_64.tbl (syscall_64.tbl)
+        - add syscall table entry for our syscall (send_repeat, 332)
+    - /net/ipv4/tcp_output.c (tcp_output.c)
+        - modify set/get sockopt for TCP
+
+# Notes on Path
 Entrypoint -> send_repeat
     - cp of send, calls sendto_repeat
 send_repeat -> sendto_repeat
@@ -20,7 +37,7 @@ tcp_make_synack:3035 -> tcp_options_write:445
 tcp_transmit_skb:908 -> tcp_options_write:445
     - called with 'opts' var
 
-# General notes:
+# General notes
 - modify retransmission code-- one vision
     - keep skb floating around, when timer goes off retransmission retransmits
     - use retransmit queue

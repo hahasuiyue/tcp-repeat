@@ -365,6 +365,10 @@
       */
      struct request_sock *fastopen_rsk;
      u32	*saved_syn;
+
+     /* TCP REPEAT ADDITIONS */
+     u32    tcp_repeat_n;
+     u32    tcp_repeat_i;
  };
  
  enum tsq_flags {

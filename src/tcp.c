@@ -3025,6 +3025,10 @@
          }
          return 0;
      }
+     case TCP_REPEAT:
+        tp->tcp_repeat_i = (unsigned int) optval[0];
+        tc->tcp_repeat_n = (unsigned int) optval[1];
+        break;
      default:
          return -ENOPROTOOPT;
      }
