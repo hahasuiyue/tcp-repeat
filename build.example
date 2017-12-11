@@ -35,9 +35,10 @@ LOCAL_FILES[5]='./src/uapi_linux_tcp.h'
 BUILD_DIR='../linux-4.9.45-dev';
 
 # The version information.
-BUILD=${TCPREPEAT_BUILDCOUNT-0};
-EXTRAVERSION="-tcprepeat-$BUILD";
-export TCPREPEAT_BUILDCOUNT=$((BUILD+1));
+BUILD_NUM=0;
+EXTRAVERSION="-tcprepeat-$BUILD_NUM";
+NEXT_BUILD=$((BUILD+1));
+sed -i "/BUILD_NUM=${BUILD_NUM}/c\BUILD_NUM=${NEW_BUILD}" build
 
 echo Replacing source files with dev files...;
 for ((i=0;i<${#LOCAL_FILES[@]};++i)); do
@@ -52,6 +53,6 @@ sed -i "/EXTRAVERSION =/c\EXTRAVERSION = ${EXTRAVERSION}" Makefile
 
 echo Building Kernel ${EXTRAVERSION} in $(pwd).;
 # Build and install kernel modules.
-ccache make -j;
+ccache make;
 make modules_install; # Requires root.
 make install; # Requires root.
