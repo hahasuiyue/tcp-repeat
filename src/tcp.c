@@ -3026,11 +3026,12 @@
          return 0;
      }
      case TCP_REPEAT:
-        printk(KERN_DEBUG "\nSetting TCP_REPEAT option.\n");
+        printk(KERN_DEBUG "\n [TCP_REPEAT] Setting TCP_REPEAT option: %u.\n", optname);
         tp->tcp_repeat_i = (unsigned int) optval[0];
         tp->tcp_repeat_n = (unsigned int) optval[1];
         break;
      default:
+        printk(KERN_DEBUG "\n [TCP_REPEAT] Failed at setting TCP_REPEAT option.\n");
          return -ENOPROTOOPT;
      }
  
