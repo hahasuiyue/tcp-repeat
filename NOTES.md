@@ -22,6 +22,8 @@ I think:
         - add syscall table entry for our syscall (send_repeat, 332)
     - /net/ipv4/tcp_output.c (tcp_output.c)
         - modify set/get sockopt for TCP
+    - /net/ipv4/tcp_input.c (tcp_input.c)
+        - modify how ack handles seeing our option in the rx opts
 
 # Notes on Path
 Entrypoint -> send_repeat
