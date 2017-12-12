@@ -609,7 +609,8 @@
              tp->syn_fastopen_exp = fastopen->cookie.exp ? 1 : 0;
          }
      }
-     
+     /* TCP_REPEAT REMOVE ME PROBABLY? */
+     remaining -= TCPOLEN_TCP_REPEAT_ALIGNED;
      return MAX_TCP_OPTION_SPACE - remaining;
  }
  
@@ -714,7 +715,7 @@
          size += TCPOLEN_SACK_BASE_ALIGNED +
              opts->num_sack_blocks * TCPOLEN_SACK_PERBLOCK;
      }
- 
+     size += TCPOLEN_TCP_REPEAT;
      return size;
  }
  
@@ -3471,7 +3472,7 @@
      if (unlikely(!buff)) {
          inet_csk_schedule_ack(sk);
          inet_csk(sk)->icsk_ack.ato = TCP_ATO_MIN;
-         inet_csk_reset_xmit_timer(sk, ICSK_TIME_DACK,
+         inet_csk_reset_xmit_timer(sk, ICSK_TIME_DACK,ack(
                        TCP_DELACK_MAX, TCP_RTO_MAX);
          return;
      }
