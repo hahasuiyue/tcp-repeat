@@ -670,7 +670,7 @@
          }
      }
      /* TCP_REPEAT REMOVE ME PROBABLY? */
-     remaing -= TCPOLEN_TCP_REPEAT_ALIGNED;
+     remaining -= TCPOLEN_TCP_REPEAT_ALIGNED;
      return MAX_TCP_OPTION_SPACE - remaining;
  }
  
