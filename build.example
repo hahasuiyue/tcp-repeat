@@ -31,8 +31,8 @@ LOCAL_FILES[4]='./src/tcp_output.c'
 TARGET_FILES[5]='../linux-4.9.45-dev/include/uapi/linux/tcp.h'
 LOCAL_FILES[5]='./src/uapi_linux_tcp.h'
 
-TARGET_FILES[5]='../linux-4.9.45-dev/include/net/tcp.h'
-LOCAL_FILES[5]='./src/net_tcp.h'
+TARGET_FILES[6]='../linux-4.9.45-dev/include/net/tcp.h'
+LOCAL_FILES[6]='./src/net_tcp.h'
 
 # The root directory of your dev kernel source.
 BUILD_DIR='../linux-4.9.45-dev';
