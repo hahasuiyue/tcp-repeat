@@ -210,9 +210,12 @@ void tcp_time_wait(struct sock *sk, int state, int timeo);
 #define TCPOLEN_SACK_PERBLOCK		8
 #define TCPOLEN_MD5SIG_ALIGNED		20
 #define TCPOLEN_MSS_ALIGNED		4
+
 /* TCP REPEAT ADDITION */
 #define TCPOLEN_TCP_REPEAT   3
-#define TCPOLEN_TCP_REPEAT_RETURN 1
+#define TCPOLEN_TCP_REPEAT_RETURN 2
+#define TCPOLEN_TCP_REPEAT_ALIGNED 4
+#define TCPOLEN_TCP_REPEAT_RETURN_ALIGNED 2
 
 /* Flags in tp->nonagle */
 #define TCP_NAGLE_OFF		1	/* Nagle's algo is disabled */

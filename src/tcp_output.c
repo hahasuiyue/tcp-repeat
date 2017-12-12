@@ -417,6 +417,7 @@
  #define OPTION_MD5		(1 << 2)
  #define OPTION_WSCALE		(1 << 3)
  #define OPTION_FAST_OPEN_COOKIE	(1 << 8)
+ #define OPTION_TCP_REPEAT (1 << 3)
  
  struct tcp_out_options {
      u16 options;		/* bit field of OPTION_* */
@@ -540,8 +541,8 @@
     *ptr++ = htonl((TCPOPT_NOP << 24) |
         (TCPOPT_TCP_REPEAT << 16) |
         (TCPOLEN_TCP_REPEAT << 8) |
-        (tcp_repeat_i << 4) |
-        (tcp_repeat_n << 4));
+        tcp_repeat_i |
+        tcp_repeat_n);
  }
  
  /* Compute TCP options for SYN packets. This is not the final
@@ -608,7 +609,7 @@
              tp->syn_fastopen_exp = fastopen->cookie.exp ? 1 : 0;
          }
      }
- 
+     
      return MAX_TCP_OPTION_SPACE - remaining;
  }
  
@@ -668,7 +669,8 @@
              remaining -= need;
          }
      }
- 
+     /* TCP_REPEAT REMOVE ME PROBABLY? */
+     remaing -= TCPOLEN_TCP_REPEAT_ALIGNED;
      return MAX_TCP_OPTION_SPACE - remaining;
  }
  
