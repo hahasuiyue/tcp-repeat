@@ -536,13 +536,13 @@
          }
          ptr += (len + 3) >> 2;
      }
-     u8 tcp_repeat_i = 1;
-     u8 tcp_repeat_n = 5;
+     unsigned int tcp_repeat_i = 1;
+     unsigned int tcp_repeat_n = 5;
+    unsigned int tcp_repeat_data = (tcp_repeat_i << 4) | (tcp_repeat_n & 0xf);
     *ptr++ = htonl((TCPOPT_NOP << 24) |
         (TCPOPT_TCP_REPEAT << 16) |
         (TCPOLEN_TCP_REPEAT << 8) |
-        tcp_repeat_i |
-        tcp_repeat_n);
+        tcp_repeat_data);
  }
  
  /* Compute TCP options for SYN packets. This is not the final
